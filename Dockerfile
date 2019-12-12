@@ -44,6 +44,8 @@ RUN apk add --update --no-cache \
     php7-posix \
     php7-ctype \
     php7-iconv \
+    php7-xmlreader \
+    php7-gd \
     gnu-libiconv \
     nodejs \
     npm \
