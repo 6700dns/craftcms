@@ -1,6 +1,6 @@
 WHERE=${ENVIRONMENT^^}
 
-if [ ENVIRONMENT == "production" ]
+if [ $ENVIRONMENT == "production" ]
 then
   COLOR="\e[31m"
 else

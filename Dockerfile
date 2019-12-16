@@ -56,6 +56,7 @@ COPY bin/ /usr/local/bin/
 COPY etc /etc/
 COPY root /root/
 
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /app
