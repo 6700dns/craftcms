@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [ "ENVIRONMENT" == "dev" ]; then
-    ln -s /etc/php7/xdebug.ini /etc/php7/conf.d/00-xdebug.ini
-fi
+#if [ "$ENVIRONMENT" == "dev" ]; then
+#    ln -s /etc/php7/xdebug.ini /etc/php7/conf.d/00-xdebug.ini
+#fi
 
 exec "$@"

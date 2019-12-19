@@ -50,7 +50,8 @@ RUN apk add --update --no-cache \
     nodejs \
     npm \
     vim \
-    mysql-client
+    mysql-client \
+    imagemagick
 
 COPY bin/ /usr/local/bin/
 COPY etc /etc/
