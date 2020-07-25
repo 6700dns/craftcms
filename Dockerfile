@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.12
 
 ENV PATH $PATH:/app/vendor/bin:/app:/app/node_modules/.bin
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -10,7 +10,7 @@ EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD ["runsvinit"]
 
-
+COPY etc/apk/repositories /etc/apk/repositories
 RUN apk add --update --no-cache \
     bash \
     runit \
@@ -57,7 +57,6 @@ COPY bin/ /usr/local/bin/
 COPY etc /etc/
 COPY root /root/
 
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /app
