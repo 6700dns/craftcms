@@ -1,0 +1,3 @@
+#!/bin/bash
+rm /etc/php7/conf.d/00-xdebug.ini
+sv restart phpfpm || true

@@ -4,10 +4,12 @@ ENV PATH $PATH:/app/vendor/bin:/app:/app/node_modules/.bin
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV APP_NAME craft
 ENV ENVIRONMENT production
+ENV PHP_OPCACHE_ENABLED=1
+ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
 
 EXPOSE 80
 
-ENTRYPOINT ["/usr/local/bin/entrypoint"]
+ENTRYPOINT ["entrypoint"]
 CMD ["runsvinit"]
 
 COPY etc/apk/repositories /etc/apk/repositories
@@ -60,3 +62,11 @@ COPY root /root/
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /app
+
+ONBUILD COPY composer* package* /app/
+ONBUILD COPY .env.production .env
+ONBUILD RUN composer install --no-scripts --no-plugins --no-autoloader --no-progress --no-dev && composer clear-cache
+ONBUILD RUN npm install
+ONBUILD COPY . /app
+ONBUILD RUN composer -o dump-autoload
+ONBUILD RUN npm run production
