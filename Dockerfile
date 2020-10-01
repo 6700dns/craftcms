@@ -29,6 +29,7 @@ RUN apk add --update --no-cache \
     php7-mbstring \
     php7-imagick \
     php7-xml \
+    php7-soap \
     php7-json \
     php7-dom \
     git \
@@ -65,7 +66,7 @@ WORKDIR /app
 
 ONBUILD COPY composer* package* /app/
 ONBUILD COPY .env.production .env
-ONBUILD RUN composer install --no-scripts --no-plugins --no-autoloader --no-progress --no-dev && composer clear-cache
+ONBUILD RUN composer install --no-scripts --no-autoloader --no-progress --no-dev && composer clear-cache
 ONBUILD RUN npm install
 ONBUILD COPY . /app
 ONBUILD RUN composer -o dump-autoload
